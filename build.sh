@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -e
 
 BUILD_PACKAGES="rsync"
 
@@ -17,13 +16,15 @@ PACKAGES="
 
 if [ "x$(which install_packages)" = "x" ]; then
   install_packages () {
-    env DEBIAN_FRONTEND=noninteractive apt-get install -qqy --no-install-recommends "$@"  
+    env DEBIAN_FRONTEND=noninteractive apt-get install -qy \
+	    -qy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
+	    --no-install-recommends "$@"  
   }
 fi
 
 install_all_packages () {
   apt update
-  install_packages ${PACKAGES} ${BUILD_PACKAGES}
+  install_packages ${BUILD_PACKAGES} ${PACKAGES}
 }
 
 ## clean up after us
@@ -36,13 +37,16 @@ cleanup () {
 }
 
 # Rsync our configuration, on top of /etc. 
-rsync () {
+sync () {
   rsync -a /tmp/conf/ /etc/ 
 }
 
 # Make sure /usr/local/bin/setup-apache.sh is executable. 
 chmod +x /usr/local/bin/setup-apache.sh
 
+set -x
+set -e
+
 install_all_packages
-rsync
+sync
 cleanup
