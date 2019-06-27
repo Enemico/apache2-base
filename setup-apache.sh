@@ -14,7 +14,6 @@ APACHE_MODULES_ENABLE="
   headers
   proxy_http
   proxy_fcgi
-  removeip
   setenvif
   ${APACHE_MODULES_ENABLE:-}
 "
