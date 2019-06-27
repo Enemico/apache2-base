@@ -6,7 +6,7 @@ BUILD_PACKAGES="rsync"
 
 PACKAGES="
   curl
-  apache2-mpm-itk
+  apache2
   prometheus-apache-exporter
   libapache2-mod-removeip
   php-cli
