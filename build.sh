@@ -35,6 +35,7 @@ cleanup () {
   rm -fr /var/lib/apt/lists/*
   rm -fr /tmp/conf
   rm -fr /var/log/dpkg.log
+  rm -fr /var/log/apt/*
 }
 
 # Rsync our configuration, on top of /etc, and var/www on top of var
