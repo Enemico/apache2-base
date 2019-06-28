@@ -18,7 +18,7 @@ if [ "x$(which install_packages)" = "x" ]; then
   install_packages () {
     env DEBIAN_FRONTEND=noninteractive apt-get install -qy \
 	    -qy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
-	    --no-install-recommends "$@"  
+	    --no-install-recommends "$@"
   }
 fi
 
@@ -36,12 +36,13 @@ cleanup () {
   rm -fr /tmp/conf
 }
 
-# Rsync our configuration, on top of /etc. 
+# Rsync our configuration, on top of /etc, and var/www on top of var
 sync () {
-  rsync -a /tmp/conf/ /etc/ 
+  rsync -a /tmp/conf/ /etc/
+  rsync -a /tmp/var/www /var/www/
 }
 
-# Make sure /usr/local/bin/setup-apache.sh is executable. 
+# Make sure /usr/local/bin/setup-apache.sh is executable.
 chmod +x /usr/local/bin/setup-apache.sh
 
 set -x
