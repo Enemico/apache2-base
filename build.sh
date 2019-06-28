@@ -39,7 +39,7 @@ cleanup () {
 # Rsync our configuration, on top of /etc, and var/www on top of var
 sync () {
   rsync -a /tmp/conf/ /etc/
-  rsync -a /tmp/var/www /var/www/
+  rsync -a /tmp/var/www/ /var/www/
 }
 
 # Make sure /usr/local/bin/setup-apache.sh is executable.
