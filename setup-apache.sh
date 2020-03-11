@@ -47,7 +47,7 @@ PHP_FPM_ENABLE="${PHP_FPM_ENABLE:-0}"
 
 # Install the php-fpm chaperone service if required.
 if [ $PHP_FPM_ENABLE -eq 1 ]; then
-    APACHE_CONFIG_ENABLE="$APACHE_CONFIG_ENABLE php7.3-fpm php7.3-fpm-proxy-fcgi"
+    APACHE_CONFIG_ENABLE="$APACHE_CONFIG_ENABLE php7.3-fpm"
     cat >/etc/chaperone.d/fpm.conf <<EOF
 fpm.service: {
     command: "/usr/sbin/php-fpm7.3 --force-stderr --nodaemonize",
