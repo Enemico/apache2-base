@@ -46,14 +46,14 @@ PHP_FPM_ENABLE="${PHP_FPM_ENABLE:-0}"
 
 # Install the php-fpm chaperone service if required.
 if [ $PHP_FPM_ENABLE -eq 1 ]; then
-    APACHE_CONFIG_ENABLE="$APACHE_CONFIG_ENABLE php7.3-fpm php7.3-fpm-proxy-fcgi"
+    APACHE_CONFIG_ENABLE="$APACHE_CONFIG_ENABLE php7.0-fpm php7.0-fpm-proxy-fcgi"
     cat >/etc/chaperone.d/fpm.conf <<EOF
 fpm.service: {
-    command: "/usr/sbin/php-fpm7.3 --force-stderr --nodaemonize",
+    command: "/usr/sbin/php-fpm7.0 --force-stderr --nodaemonize",
     exit_kills: true,
 }
 fpm-exporter.service: {
-    command: "sh -c '. /etc/apache2/envvars && HOME=/ exec /usr/sbin/php-fpm-exporter server --phpfpm.scrape-uri=unix:///run/php/php7.3-fpm.sock\\\\;/status --web.listen-address=:\$PHP_FPM_EXPORTER_PORT'",
+    command: "sh -c '. /etc/apache2/envvars && HOME=/ exec /usr/sbin/php-fpm-exporter server --phpfpm.scrape-uri=unix:///run/php/php7.0-fpm.sock\\\\;/status --web.listen-address=:\$PHP_FPM_EXPORTER_PORT'",
     restart: true,
 }
 EOF
