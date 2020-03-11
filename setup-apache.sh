@@ -21,6 +21,7 @@ APACHE_MODULES_ENABLE="
 # Apache modules that are enabled by default by the Debian package,
 # and that we want to disable.
 APACHE_MODULES_DISABLE="
+  status
   ${APACHE_MODULES_DISABLE:-}
 "
 
